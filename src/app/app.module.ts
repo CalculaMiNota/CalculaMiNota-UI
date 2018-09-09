@@ -9,12 +9,14 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { RouterModule, Routes } from '../../node_modules/@angular/router';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent }
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'dashboard', component: DashboardComponent }
 ];
 
 @NgModule({
@@ -22,7 +24,8 @@ const routes: Routes = [
     AppComponent,
     SignInComponent,
     SignUpComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
