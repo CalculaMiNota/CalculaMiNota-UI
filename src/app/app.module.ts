@@ -8,18 +8,21 @@ import { environment } from '../environments/environment';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { RouterModule, Routes } from '../../node_modules/@angular/router';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
   { path: 'sign-in', component: SignInComponent },
-  { path: 'sign-up', component: SignUpComponent }
+  { path: 'sign-up', component: SignUpComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
