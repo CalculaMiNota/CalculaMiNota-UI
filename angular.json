@@ -23,9 +23,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/plugins/jquery/jquery.min.js",
+              "src/assets/plugins/bootstrap/js/bootstrap.js",
+              "src/assets/plugins/node-waves/waves.js",
+              "src/assets/plugins/jquery-validation/jquery.validate.js",
+              "src/assets/js/admin.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -72,9 +78,14 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
-            "scripts": [],
+            "scripts": [
+              "src/assets/plugins/jquery/jquery.min.js",
+              "src/assets/plugins/bootstrap/js/bootstrap.js",
+              "src/assets/plugins/node-waves/waves.js",
+              "src/assets/plugins/jquery-validation/jquery.validate.js"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -123,5 +134,10 @@
       }
     }
   },
-  "defaultProject": "CalculaMiNota-UI"
+  "defaultProject": "CalculaMiNota-UI",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
