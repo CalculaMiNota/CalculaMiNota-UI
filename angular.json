@@ -32,6 +32,7 @@
               "src/assets/plugins/bootstrap-select/js/bootstrap-select.js",
               "src/assets/plugins/bootstrap-notify/bootstrap-notify.js",
               "src/assets/plugins/node-waves/waves.js",
+              "src/assets/plugins/sweetalert/sweetalert.min.js",
               "src/assets/plugins/jquery-validation/jquery.validate.js",
               "src/assets/plugins/jquery-slimscroll/jquery.slimscroll.js",
               "src/assets/js/admin.js"              

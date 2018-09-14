@@ -8,6 +8,7 @@ import { Utilities } from '../../shared/classes/utilities';
 //import * as $ from 'jquery';
 declare var jquery:any;
 declare var $ :any;
+declare let swal: any;
 
 @Component({
   selector: 'app-sign-up',
@@ -46,8 +47,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     };
     
     this.http.post('usuarios/registro', toSendData).subscribe(data=>{
-      alert(JSON.stringify(data));
-      console.log(data)
+      swal("Registro completo!", "", "success");
     }, error=>{
       alert(JSON.stringify(error));
     });
