@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpService } from '../../shared/services/http.service';
 import { Validation } from '../../shared/classes/validation';
 import { Utilities } from '../../shared/classes/utilities';
+import { Router } from '@angular/router';
 //import * as $ from 'jquery';
 declare var jquery:any;
 declare var $ :any;
@@ -22,7 +23,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   public confirmPasswordSignUp:string = "";
 
 
-  constructor(@Inject(DOCUMENT) private document: Document, private http: HttpService) {}
+  constructor(@Inject(DOCUMENT) private document: Document, private http: HttpService, private router: Router) {}
 
   ngOnInit() {
     this.document.body.classList.add('signup-page');
@@ -47,9 +48,21 @@ export class SignUpComponent implements OnInit, OnDestroy {
     };
     
     this.http.post('usuarios/registro', toSendData).subscribe(data=>{
+      
+      swal({
+        title: "Registro completo!",
+        type: "success",
+      }, function(){
+        this.router.navigate(['/sign-in']);
+      });
       swal("Registro completo!", "", "success");
     }, error=>{
-      alert(JSON.stringify(error));
+      swal({
+        title: "Error",
+        text: JSON.stringify(error),
+        type: "error",
+      });
+      
     });
     
 
