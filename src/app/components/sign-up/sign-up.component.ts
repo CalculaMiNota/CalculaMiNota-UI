@@ -1,5 +1,8 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { DOCUMENT } from '../../../../node_modules/@angular/common';
+import {NgForm} from '@angular/forms'
+import { HttpClient } from '@angular/common/http';
+import { HttpService } from '../../shared/services/http.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -8,7 +11,12 @@ import { DOCUMENT } from '../../../../node_modules/@angular/common';
 })
 export class SignUpComponent implements OnInit, OnDestroy {
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  public emailSingUp:string = "email@test.com";
+  public passwordSignUp:string = "123456";
+  public confirmPasswordSignUp:string = "123456";
+
+
+  constructor(@Inject(DOCUMENT) private document: Document, private http: HttpService) {}
 
   ngOnInit() {
     this.document.body.classList.add('signup-page');
@@ -16,6 +24,38 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.document.body.classList.remove('signup-page');
+  }
+
+  validarForm(){
+    return this.validarCorreosIguales();
+  }
+
+  validarCorreosIguales(){ 
+    return this.confirmPasswordSignUp === this.passwordSignUp;
+  }
+
+  registrarse(){
+    if(!this.validarForm())
+    {
+      alert("Contraseñas no coinciden")
+      return;
+    }
+      
+    //Objeto a enviar al servidor
+    let toSendData = {
+      email : this.emailSingUp,
+      password : this.passwordSignUp
+    };
+    
+    this.http.post('usuarios/registro', toSendData).subscribe(data=>{
+      alert(JSON.stringify(data));
+      console.log(data)
+    }, error=>{
+      alert(JSON.stringify(error));
+    });
+    
+
+    
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { DOCUMENT } from '../../../../node_modules/@angular/common';
+import * as $ from '../../../assets/plugins/jquery/jquery.min.js';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,6 +13,10 @@ export class SignInComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.document.body.classList.add('login-page');
+    $('body').notify({
+      message: 'Hello World',
+      type: 'danger'
+    });
   }
 
   ngOnDestroy() {

@@ -10,6 +10,11 @@ import { AppRoutingModule } from './/app-routing.module';
 import { RouterModule, Routes } from '../../node_modules/@angular/router';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import * as $ from '../assets/plugins/jquery/jquery.min.js';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpService } from './shared/services/http.service';
+
 
 const routes: Routes = [
   { path: '', component: SignInComponent },
@@ -29,11 +34,15 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     AppRoutingModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    HttpService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
