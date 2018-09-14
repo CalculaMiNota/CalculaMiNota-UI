@@ -14,6 +14,7 @@ import * as $ from '../assets/plugins/jquery/jquery.min.js';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from './shared/services/http.service';
+import { LogoInicioComponent } from './components/logo-inicio/logo-inicio.component';
 
 
 const routes: Routes = [
@@ -30,7 +31,8 @@ const routes: Routes = [
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,
-    DashboardComponent
+    DashboardComponent,
+    LogoInicioComponent
   ],
   imports: [
     BrowserModule,
