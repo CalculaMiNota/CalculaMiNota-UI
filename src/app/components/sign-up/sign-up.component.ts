@@ -3,6 +3,11 @@ import { DOCUMENT } from '../../../../node_modules/@angular/common';
 import {NgForm} from '@angular/forms'
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from '../../shared/services/http.service';
+import { Validation } from '../../shared/classes/validation';
+import { Utilities } from '../../shared/classes/utilities';
+//import * as $ from 'jquery';
+declare var jquery:any;
+declare var $ :any;
 
 @Component({
   selector: 'app-sign-up',
@@ -11,33 +16,26 @@ import { HttpService } from '../../shared/services/http.service';
 })
 export class SignUpComponent implements OnInit, OnDestroy {
 
-  public emailSingUp:string = "email@test.com";
-  public passwordSignUp:string = "123456";
-  public confirmPasswordSignUp:string = "123456";
+  public emailSingUp:string = "";
+  public passwordSignUp:string = "";
+  public confirmPasswordSignUp:string = "";
 
 
   constructor(@Inject(DOCUMENT) private document: Document, private http: HttpService) {}
 
   ngOnInit() {
     this.document.body.classList.add('signup-page');
+    Validation.createSignUpValidation();
   }
 
   ngOnDestroy() {
     this.document.body.classList.remove('signup-page');
   }
 
-  validarForm(){
-    return this.validarCorreosIguales();
-  }
-
-  validarCorreosIguales(){ 
-    return this.confirmPasswordSignUp === this.passwordSignUp;
-  }
-
   registrarse(){
-    if(!this.validarForm())
+    if(!Validation.validateSingUp())
     {
-      alert("Contraseñas no coinciden")
+      Utilities.notificarError("Datos no válidos", true);
       return;
     }
       

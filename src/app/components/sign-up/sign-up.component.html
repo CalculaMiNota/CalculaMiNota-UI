@@ -5,14 +5,14 @@
     </div>
     <div class="card">
         <div class="body">
-            <form >
+            <form id="signUpForm">
                 <div class="msg">Crea una nueva cuenta</div>
                 <div class="input-group">
                     <span class="input-group-addon">
                         <i class="material-icons">email</i>
                     </span>
                     <div class="form-line">
-                        <input [(ngModel)]="emailSingUp" type="email" class="form-control" name="email" placeholder="Email" required>
+                        <input [(ngModel)]="emailSingUp" id="emailSignUp" type="email" class="form-control" name="emailSignUp" placeholder="Email" required>
                     </div>
                 </div>
                 <div class="input-group">
@@ -20,7 +20,7 @@
                         <i class="material-icons">lock</i>
                     </span>
                     <div class="form-line">
-                        <input  [(ngModel)]="passwordSignUp" type="password" class="form-control" name="password" minlength="6" placeholder="Contraseña" required>
+                        <input  [(ngModel)]="passwordSignUp" id="passwordSignUp" type="password" class="form-control" name="passwordSignUp" minlength="8" placeholder="Contraseña" required>
                     </div>
                 </div>
                 <div class="input-group">
@@ -28,7 +28,7 @@
                         <i class="material-icons">lock</i>
                     </span>
                     <div class="form-line">
-                        <input [(ngModel)]="confirmPasswordSignUp" type="password" class="form-control" name="confirm" minlength="6" placeholder="Confirma Contraseña"
+                        <input [(ngModel)]="confirmPasswordSignUp" id="confirmPasswordSignUp" type="password" class="form-control" name="confirm" name="confirmPasswordSignUp" placeholder="Confirma Contraseña"
                             required>
                     </div>
                 </div>

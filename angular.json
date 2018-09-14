@@ -27,12 +27,12 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "src/assets/plugins/jquery/jquery.min.js",
+              "src/assets/plugins/jquery/jquery.js",              
               "src/assets/plugins/bootstrap/js/bootstrap.js",
-              "src/assets/plugins/node-waves/waves.js",
-              "src/assets/plugins/jquery-validation/jquery.validate.js",
               "src/assets/plugins/bootstrap-select/js/bootstrap-select.js",
               "src/assets/plugins/bootstrap-notify/bootstrap-notify.js",
+              "src/assets/plugins/node-waves/waves.js",
+              "src/assets/plugins/jquery-validation/jquery.validate.js",
               "src/assets/plugins/jquery-slimscroll/jquery.slimscroll.js",
               "src/assets/js/admin.js"              
             ]
