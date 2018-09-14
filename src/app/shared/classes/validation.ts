@@ -1,3 +1,5 @@
+import { environment } from "../../../environments/environment.prod";
+
 declare var $ :any;
 export class Validation {
 
@@ -10,7 +12,7 @@ export class Validation {
                     required: true,
                     email: true,
                     remote: {
-                        url: "http://localhost/CalculaMiNota-Backend/public/api/usuarios/exists?" + $("#emailSignUp").val() ,
+                        url: environment.baseUrl + "usuarios/exists?" + $("#emailSignUp").val() ,
                         type : "get",
                         }
                 },
