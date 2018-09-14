@@ -21,13 +21,22 @@ export class SignUpComponent implements OnInit, OnDestroy {
   public emailSingUp:string = "";
   public passwordSignUp:string = "";
   public confirmPasswordSignUp:string = "";
+  private validation: Validation;
+  private router: Router;
 
-
-  constructor(@Inject(DOCUMENT) private document: Document, private http: HttpService, private router: Router) {}
+  constructor(
+    @Inject(DOCUMENT) private document: Document, 
+    private http: HttpService, 
+    router: Router) 
+  {
+    this.router = router;
+    
+    this.validation = new Validation();
+  }
 
   ngOnInit() {
     this.document.body.classList.add('signup-page');
-    Validation.createSignUpValidation();
+    this.validation.createSignUpValidation();
   }
 
   ngOnDestroy() {
@@ -35,9 +44,9 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   registrarse(){
-    if(!Validation.validateSingUp())
+    if(!this.validation.validateSingUp())
     {
-      Utilities.notificarError("Datos no válidos", true);
+      Utilities.notificarError("Datos no válidos");
       return;
     }
       
@@ -48,18 +57,19 @@ export class SignUpComponent implements OnInit, OnDestroy {
     };
     
     this.http.post('usuarios/registro', toSendData).subscribe(data=>{
-      
+      let router = this.router;
       swal({
         title: "Registro completo!",
         type: "success",
       }, function(){
-        this.router.navigate(['/sign-in']);
+        router.navigate(['/sign-in']);
       });
-      swal("Registro completo!", "", "success");
+
     }, error=>{
+      this.validation.validateSingUp();
       swal({
         title: "Error",
-        text: JSON.stringify(error),
+        text: "Ha ocurrido un problema con el registro",
         type: "error",
       });
       

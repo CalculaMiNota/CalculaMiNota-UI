@@ -1,8 +1,10 @@
 declare var $ :any;
 export class Validation {
 
-    public static createSignUpValidation(){
-        $('#signUpForm').validate({
+    public signInValidator = null;
+    
+    public createSignUpValidation(){
+        this.signInValidator = $('#signUpForm').validate({
             rules: {
                 'emailSignUp': {
                     required: true,
@@ -50,7 +52,8 @@ export class Validation {
         });
     }
 
-    public static validateSingUp(){
+    public validateSingUp(){
+        this.signInValidator.resetForm();
         return $("#signUpForm").valid();
     }
 
