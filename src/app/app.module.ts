@@ -15,14 +15,18 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from './shared/services/http.service';
 import { LogoInicioComponent } from './components/logo-inicio/logo-inicio.component';
+import { LoggedGuard } from './shared/guards/logged.guard';
+import { LoginService } from './shared/services/login.service';
+import { NologgedGuard } from './shared/guards/nologged.guard';
+
 
 
 const routes: Routes = [
-  { path: '', component: SignInComponent },
-  { path: 'sign-in', component: SignInComponent },
-  { path: 'sign-up', component: SignUpComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'dashboard', component: DashboardComponent }
+  { path: '', component: SignInComponent, canActivate: [NologgedGuard] },
+  { path: 'sign-in', component: SignInComponent, canActivate: [NologgedGuard] },
+  { path: 'sign-up', component: SignUpComponent, canActivate: [NologgedGuard] },
+  { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [NologgedGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [LoggedGuard] }
 ];
 
 @NgModule({
@@ -43,7 +47,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   providers: [
-    HttpService
+    HttpService,
+    LoginService
   ],
   bootstrap: [AppComponent]
 })

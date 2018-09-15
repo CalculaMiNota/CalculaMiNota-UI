@@ -11,7 +11,7 @@
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="email" class="form-control" name="email" placeholder="Email" required autofocus>
+                            <input [(ngModel)]="emailSingIn" type="email" class="form-control" name="email" placeholder="Email" required autofocus>
                         </div>
                     </div>
                     <div class="input-group">
@@ -19,7 +19,7 @@
                             <i class="material-icons">lock</i>
                         </span>
                         <div class="form-line">
-                            <input type="password" class="form-control" name="password" placeholder="Contraseña" required>
+                            <input [(ngModel)]="passwordSignIn" type="password" class="form-control" name="password" placeholder="Contraseña" required>
                         </div>
                     </div>
                     <div class="row">
@@ -30,7 +30,7 @@
                         <div class="col-xs-4">
                             <!-- <button class="btn btn-block bg-pink waves-effect" type="submit">Ingresar</button> -->
                             <!-- Usando href en lugar de routerlink porque se queda en pending-->
-                            <a href="/dashboard" class="btn btn-block bg-pink waves-effect" type="submit">Ingresar</a>
+                            <a (click)="login()" class="btn btn-block bg-pink waves-effect" type="submit">Ingresar</a>
                         </div>
                     </div>
                     <div class="row m-t-15 m-b--20">
