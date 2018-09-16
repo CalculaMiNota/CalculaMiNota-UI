@@ -19,6 +19,12 @@ import { LoggedGuard } from './shared/guards/logged.guard';
 import { LoginService } from './shared/services/login.service';
 import { NologgedGuard } from './shared/guards/nologged.guard';
 import { AuthService } from './shared/services/auth.service';
+import { LoaderComponent } from './components/loader/loader.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SidebarsComponent } from './components/sidebars/sidebars.component';
+import { LeftSidebarComponent } from './components/left-sidebar/left-sidebar.component';
+import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
+import { ContentComponent } from './components/content/content.component';
 
 
 
@@ -37,7 +43,13 @@ const routes: Routes = [
     SignUpComponent,
     ForgotPasswordComponent,
     DashboardComponent,
-    LogoInicioComponent
+    LogoInicioComponent,
+    LoaderComponent,
+    NavbarComponent,
+    SidebarsComponent,
+    LeftSidebarComponent,
+    RightSidebarComponent,
+    ContentComponent
   ],
   imports: [
     BrowserModule,

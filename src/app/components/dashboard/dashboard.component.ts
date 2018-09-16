@@ -8,10 +8,10 @@ declare var $: any;
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
-  
-  public loading:boolean = true;
 
-  constructor(@Inject(DOCUMENT) private document: Document, private auth:AuthService) {}
+  public loading: boolean = true;
+
+  constructor(@Inject(DOCUMENT) private document: Document, private auth: AuthService) { }
 
 
   ngOnInit() {
@@ -31,18 +31,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       $.AdminBSB.input.activate();
       $.AdminBSB.select.activate();
       $.AdminBSB.search.activate();
-  
+
       setTimeout(function () { $('.page-loader-wrapper').fadeOut(); }, 50);
-  });
-
-  }
-
-  logout(){
-    this.auth.logout().subscribe(res=>{
-      if(res['logged'] == 'false'){
-        window.location.replace('/');
-      }
     });
-    
+
   }
 }
