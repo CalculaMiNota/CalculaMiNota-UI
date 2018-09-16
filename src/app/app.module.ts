@@ -16,7 +16,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from './shared/services/http.service';
 import { LogoInicioComponent } from './components/logo-inicio/logo-inicio.component';
 import { LoggedGuard } from './shared/guards/logged.guard';
-import { LoginService } from './shared/services/login.service';
 import { NologgedGuard } from './shared/guards/nologged.guard';
 import { AuthService } from './shared/services/auth.service';
 import { LoaderComponent } from './components/loader/loader.component';
@@ -61,7 +60,6 @@ const routes: Routes = [
   ],
   providers: [
     HttpService,
-    LoginService,
     AuthService
   ],
   bootstrap: [AppComponent]

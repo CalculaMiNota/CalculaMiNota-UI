@@ -15,4 +15,8 @@ export class AuthService {
   public logout(){
     return this.http.get('usuarios/logout');
   }
+
+  public getUserInfo(){
+    return this.http.get('usuarios/getUserInfo');
+  }
 }
