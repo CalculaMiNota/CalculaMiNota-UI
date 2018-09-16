@@ -2,23 +2,27 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LoginService } from '../services/login.service';
+import { AuthService } from '../services/auth.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NologgedGuard implements CanActivate {
 
-  constructor(private login:LoginService, public router: Router) {}
-  canActivate(): boolean {
-    console.log(this.login.isLogged())
-    if(this.login.isLogged())
-    {
-      this.router.navigate(['/dashboard']);
-      return false;
-    }
-    else
-    {
-      return true;
-    }
+  constructor(private login:AuthService, public router: Router) {}
+  canActivate():Observable<boolean> {
+    return this.login.isLogged().pipe(map(res => {
+      //Response comes as string
+      if(res['logged'] == 'false')
+      {
+        return true;
+      }        
+      else
+      {
+        window.location.replace('/dashboard');
+        return false;
+      }
+    }));
   }
 }

@@ -18,6 +18,7 @@ import { LogoInicioComponent } from './components/logo-inicio/logo-inicio.compon
 import { LoggedGuard } from './shared/guards/logged.guard';
 import { LoginService } from './shared/services/login.service';
 import { NologgedGuard } from './shared/guards/nologged.guard';
+import { AuthService } from './shared/services/auth.service';
 
 
 
@@ -48,7 +49,8 @@ const routes: Routes = [
   ],
   providers: [
     HttpService,
-    LoginService
+    LoginService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
