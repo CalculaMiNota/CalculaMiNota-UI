@@ -19,6 +19,7 @@ declare let swal: any;
 export class SignUpComponent implements OnInit, OnDestroy {
 
   public emailSingUp:string = "";
+  public nameSingUp:string = "";
   public passwordSignUp:string = "";
   public confirmPasswordSignUp:string = "";
   private validation: Validation;
@@ -52,11 +53,12 @@ export class SignUpComponent implements OnInit, OnDestroy {
       
     //Objeto a enviar al servidor
     let toSendData = {
+      name: this.nameSingUp,
       email : this.emailSingUp,
       password : this.passwordSignUp
     };
     
-    this.http.post('usuarios/registro', toSendData).subscribe(data=>{
+    this.http.post('usuarios/register', toSendData).subscribe(data=>{
       let router = this.router;
       swal({
         title: "Registro completo!",
