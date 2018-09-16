@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: "http://localhost/CalculaMiNota-Backend/public/api/"
+  baseUrl: "http://calculaminotabackend.herokuapp.com/api/"
 };
 
 /*
