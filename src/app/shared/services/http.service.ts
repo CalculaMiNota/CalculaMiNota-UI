@@ -11,26 +11,22 @@ export class HttpService {
   constructor(private http: HttpClient) { }
 
   public get(url: string, headers?: HttpHeaders) {
-    if (headers === null) {
+    if (headers === null || typeof headers === 'undefined' ) {
       headers = new HttpHeaders();
-      headers.append('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
-      headers.append('Content-Type', 'application/json');
+      headers = headers.set('Content-Type', 'application/json; charset=utf-8');
     }
 
     let httpOptions = {
       'headers': headers,
       'withCredentials': true
     };
-
     return this.http.get(environment.baseUrl + url, httpOptions);
   }
 
   public post(url: string, body: any, headers?: HttpHeaders) {
     if (headers === null) {
       headers = new HttpHeaders();
-      //headers.append('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
       headers.append('Content-Type', 'application/json');
-      
     }
 
     let httpOptions = {

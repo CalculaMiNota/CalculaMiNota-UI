@@ -22,6 +22,8 @@ export class NologgedGuard implements CanActivate {
         window.location.replace('/dashboard');
         return false;
       }
+    }, error =>{
+      return true;
     }));
   }
 }
