@@ -16,9 +16,23 @@
         <ul class="list">
             <li class="header">Menú</li>
             <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-                <a [routerLink]="['/dashboard']">
+                <a [routerLink]="['/app']">
                     <i class="material-icons">home</i>
                     <span>Inicio</span>
+                </a>
+            </li>
+
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                <a [routerLink]="['/app/calificaciones']">
+                    <i class="material-icons">web</i>
+                    <span>Calificaciones</span>
+                </a>
+            </li>
+
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                <a [routerLink]="['/app/estimaciones']">
+                    <i class="material-icons">border_color</i>
+                    <span>Estimaciones</span>
                 </a>
             </li>
         </ul>

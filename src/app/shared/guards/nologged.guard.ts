@@ -19,7 +19,7 @@ export class NologgedGuard implements CanActivate {
       }        
       else
       {
-        window.location.replace('/dashboard');
+        window.location.replace('/app');
         return false;
       }
     }, error =>{

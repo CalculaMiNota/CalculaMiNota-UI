@@ -49,8 +49,7 @@ export class SignInComponent implements OnInit, OnDestroy {
     this.http.post(url, toSendData).subscribe(data => {
       let router = this.router;
       if(data['status'] === 'ok'){
-        window.location.href = '/dashboard';
-        //router.navigate(['/dashboard']);
+        window.location.href = '/app';
       }
       
     }, error => {

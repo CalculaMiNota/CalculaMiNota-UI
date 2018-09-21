@@ -24,6 +24,9 @@ import { SidebarsComponent } from './components/sidebars/sidebars.component';
 import { LeftSidebarComponent } from './components/left-sidebar/left-sidebar.component';
 import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
 import { ContentComponent } from './components/content/content.component';
+import { CalificacionesComponent } from './components/calificaciones/calificaciones.component';
+import { EstimacionesComponent } from './components/estimaciones/estimaciones.component';
+import { MainComponent } from './components/main/main.component';
 
 
 
@@ -32,7 +35,23 @@ const routes: Routes = [
   { path: 'sign-in', component: SignInComponent, canActivate: [NologgedGuard] },
   { path: 'sign-up', component: SignUpComponent, canActivate: [NologgedGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [NologgedGuard] },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [LoggedGuard] }
+  { 
+    path: 'app', 
+    component: DashboardComponent, 
+    canActivate: [LoggedGuard],
+    children: [
+      {
+        path: "",
+        component: MainComponent
+      },{
+        path: "calificaciones",
+        component: CalificacionesComponent
+      },{
+        path: "estimaciones",
+        component: EstimacionesComponent
+      }
+    ]
+  }
 ];
 
 @NgModule({
@@ -48,7 +67,10 @@ const routes: Routes = [
     SidebarsComponent,
     LeftSidebarComponent,
     RightSidebarComponent,
-    ContentComponent
+    ContentComponent,
+    CalificacionesComponent,
+    EstimacionesComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
