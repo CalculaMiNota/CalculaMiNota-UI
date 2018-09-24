@@ -35,6 +35,7 @@
               "src/assets/plugins/sweetalert/sweetalert.min.js",
               "src/assets/plugins/jquery-validation/jquery.validate.js",
               "src/assets/plugins/jquery-slimscroll/jquery.slimscroll.js",
+              "src/assets/plugins/editable-table/mindmup-editabletable.js",
               "src/assets/js/admin.js"              
             ]
           },

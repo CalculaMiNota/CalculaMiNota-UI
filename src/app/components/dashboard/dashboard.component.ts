@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       $.AdminBSB.input.activate();
       $.AdminBSB.select.activate();
       $.AdminBSB.search.activate();
+      
 
       setTimeout(function () { $('.page-loader-wrapper').fadeOut(); }, 50);
     });

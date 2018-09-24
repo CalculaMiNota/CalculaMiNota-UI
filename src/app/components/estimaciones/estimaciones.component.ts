@@ -10,6 +10,6 @@ export class EstimacionesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
 
+  }
 }
