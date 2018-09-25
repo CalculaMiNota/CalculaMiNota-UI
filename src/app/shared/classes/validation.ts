@@ -1,4 +1,5 @@
-import { environment } from "../../../environments/environment.prod";
+import { environment } from "../../../environments/environment";
+
 
 declare var $ :any;
 export class Validation {
