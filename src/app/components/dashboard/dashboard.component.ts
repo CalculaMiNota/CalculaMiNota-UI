@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
 import { DOCUMENT } from '../../../../node_modules/@angular/common';
 import { AuthService } from '../../shared/services/auth.service';
+import { StaticUtilties } from '../../shared/classes/validation';
 declare var $: any;
 @Component({
   selector: 'app-dashboard',
@@ -22,19 +23,17 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.loading = false;
 
-    $(function () {
-      $.AdminBSB.browser.activate();
-      $.AdminBSB.leftSideBar.activate();
-      $.AdminBSB.rightSideBar.activate();
-      $.AdminBSB.navbar.activate();
-      $.AdminBSB.dropdownMenu.activate();
-      $.AdminBSB.input.activate();
-      $.AdminBSB.select.activate();
-      $.AdminBSB.search.activate();
-      
+    $.AdminBSB.browser.activate();
+    $.AdminBSB.leftSideBar.activate();
+    $.AdminBSB.rightSideBar.activate();
+    $.AdminBSB.navbar.activate();
+    $.AdminBSB.dropdownMenu.activate();
+    $.AdminBSB.input.activate();
+    $.AdminBSB.select.activate();
+    $.AdminBSB.search.activate();
 
-      setTimeout(function () { $('.page-loader-wrapper').fadeOut(); }, 50);
-    });
+    setTimeout(function () { $('.page-loader-wrapper').fadeOut(); }, 50);
+    
 
   }
 }

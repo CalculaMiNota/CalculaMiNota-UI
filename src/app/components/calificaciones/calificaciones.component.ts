@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { StaticUtilties } from '../../shared/classes/validation';
 declare var $: any;
 @Component({
@@ -6,11 +6,13 @@ declare var $: any;
   templateUrl: './calificaciones.component.html',
   styleUrls: ['./calificaciones.component.scss']
 })
-export class CalificacionesComponent implements OnInit {
+export class CalificacionesComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
-      StaticUtilties.initializeInputs();
       $('#nuevasCalificacionesTable').editableTableWidget();
+  }
+  ngAfterViewInit(){
+    StaticUtilties.initializeInputs();
   }
 
   addRow() {

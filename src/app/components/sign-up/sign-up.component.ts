@@ -79,7 +79,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
       this.validation.validateSingUp();
       swal({
         title: "Error",
-        text: "Ha ocurrido un problema con el registro",
+        text: "Ha ocurrido un problema con el ingreso",
         type: "error",
       });
       
