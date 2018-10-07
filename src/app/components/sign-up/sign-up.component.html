@@ -39,8 +39,7 @@
                 </div>
                 <div class="form-group">
                     <input type="checkbox" name="terms" id="terms" class="filled-in chk-col-pink">
-                    <label for="terms">He leído y acepto los<a href="javascript:void(0);"> términos y condiciones de
-                            uso</a>.</label>
+                    <label for="terms">He leído y acepto los<a data-toggle="modal" data-target="#terminos_condiciones_modal"> términos y condiciones de uso</a>.</label>
                 </div>
 
                 <button class="btn btn-block btn-lg bg-pink waves-effect" type="button" (click)="registrarse()" >Registrarse</button>
@@ -49,6 +48,30 @@
                     <a [routerLink]="['/sign-in']">Ya posees una cuenta?</a>
                 </div>
             </form>
+        </div>
+    </div>
+
+    
+</div>
+<!-- Terminos y condiciones Modal -->
+<div class="modal fade" id="terminos_condiciones_modal" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="teminos_label_modal">Términos y condiciones</h4>
+            </div>
+            <div class="modal-body">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sodales orci ante, sed ornare eros
+                vestibulum ut. Ut accumsan
+                vitae eros sit amet tristique. Nullam scelerisque nunc enim, non dignissim nibh faucibus ullamcorper.
+                Fusce pulvinar libero vel ligula iaculis ullamcorper. Integer dapibus, mi ac tempor varius, purus
+                nibh mattis erat, vitae porta nunc nisi non tellus. Vivamus mollis ante non massa egestas fringilla.
+                Vestibulum egestas consectetur nunc at ultricies. Morbi quis consectetur nunc.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link waves-effect" (click)="rechazar_terminos()" data-dismiss="modal">No estoy de acuerdo</button>
+                <button type="button" class="btn btn-link waves-effect" (click)="aceptar_terminos()" data-dismiss="modal">Estoy de acuerdo!</button>
+            </div>
         </div>
     </div>
 </div>

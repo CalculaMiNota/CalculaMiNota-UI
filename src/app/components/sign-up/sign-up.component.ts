@@ -44,6 +44,14 @@ export class SignUpComponent implements OnInit, OnDestroy {
     this.document.body.classList.remove('signup-page');
   }
 
+  aceptar_terminos() {
+    $('#terms').prop("checked", true)
+  }
+
+  rechazar_terminos() {
+    $('#terms').prop("checked", false)
+  }
+
   registrarse(){
     if(!this.validation.validateSingUp())
     {
