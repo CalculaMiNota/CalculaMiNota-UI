@@ -9,44 +9,46 @@ declare var $: any;
 export class CalificacionesComponent implements OnInit {
 
   ngOnInit() {
-
-    $(function () {
-      $('#mainTable').editableTableWidget();
       StaticUtilties.initializeInputs();
-    });
+      $('#nuevasCalificacionesTable').editableTableWidget();
   }
 
   addRow() {
-    //let row = this.generateRow();
-    $("#mainTable").find('tbody').append('<tr><td tabindex="1">Nombre</td><td tabindex="1">1</td><td tabindex="1">0</td></tr>');
+    $("#nuevasCalificacionesTable").find('tbody').append('<tr><td tabindex="1">Nombre</td><td tabindex="1">1</td><td tabindex="1">0</td></tr>');
   }
 
   sumaMedio() {
-    let trs = $("#mainTable").find('tbody').find('tr');
+    let trs = $("#nuevasCalificacionesTable").find('tbody').find('tr');
     if (trs.length == 0)
       return 0;
 
     let sum = 0;
 
     for (let i = 0, end = trs.length; i < end; i++) {
-      sum += parseInt($("#mainTable tbody tr")[i].children[1].textContent) * parseInt($("#mainTable tbody tr")[i].children[2].textContent);
+      sum += parseInt($("#nuevasCalificacionesTable tbody tr")[i].children[1].textContent) * parseInt($("#nuevasCalificacionesTable tbody tr")[i].children[2].textContent);
     }
 
     return sum;
   }
 
   sumaFinal() {
-    let trs = $("#mainTable").find('tbody').find('tr');
+    let trs = $("#nuevasCalificacionesTable").find('tbody').find('tr');
     if (trs.length == 0)
       return 0;
 
     let sum = 0;
 
     for (let i = 0, end = trs.length; i < end; i++) {
-      sum += parseInt($("#mainTable tbody tr")[i].children[2].textContent)
+      sum += parseInt($("#nuevasCalificacionesTable tbody tr")[i].children[2].textContent)
     }
 
     return sum;
+  }
+
+  guardar()
+  {
+    console.log("La funcion para guardar no esta implementada");
+    
   }
 
 }

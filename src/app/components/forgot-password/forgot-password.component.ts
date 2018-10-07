@@ -18,4 +18,8 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     this.document.body.classList.remove('fp-page');
   }
 
+  enviarCorreo(){
+    console.log("Funcion de enviar correo no esta implementada");
+  }
+
 }
