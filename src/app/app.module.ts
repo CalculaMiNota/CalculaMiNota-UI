@@ -27,6 +27,7 @@ import { ContentComponent } from './components/content/content.component';
 import { CalificacionesComponent } from './components/calificaciones/calificaciones.component';
 import { EstimacionesComponent } from './components/estimaciones/estimaciones.component';
 import { MainComponent } from './components/main/main.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 
 
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'sign-in', component: SignInComponent, canActivate: [NologgedGuard] },
   { path: 'sign-up', component: SignUpComponent, canActivate: [NologgedGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [NologgedGuard] },
+  { path: 'reset-password', component: ResetPasswordComponent, canActivate: [NologgedGuard] },
   { 
     path: 'app', 
     component: DashboardComponent, 
@@ -70,7 +72,8 @@ const routes: Routes = [
     ContentComponent,
     CalificacionesComponent,
     EstimacionesComponent,
-    MainComponent
+    MainComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

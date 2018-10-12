@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { StaticUtilties } from '../../shared/classes/validation';
+import { HttpService } from '../../shared/services/http.service';
+import { AuthService } from '../../shared/services/auth.service';
 declare var $: any;
 @Component({
   selector: 'app-calificaciones',
@@ -8,15 +10,25 @@ declare var $: any;
 })
 export class CalificacionesComponent implements OnInit, AfterViewInit {
 
-  ngOnInit() {
-      $('#nuevasCalificacionesTable').editableTableWidget();
+  public nombreCursoNuevo: string = "";
+  public puntajeTotalCursoNuevo: number = 100;
+  private usuarioEmail: string = "";
+  private tabla;
+  constructor(private http: HttpService,
+    private auth: AuthService) {
+
   }
-  ngAfterViewInit(){
+
+  ngOnInit() {
+    this.tabla = $('#nuevasCalificacionesTable').editableTableWidget();
+    this.loadUserInfo();
+  }
+  ngAfterViewInit() {
     StaticUtilties.initializeInputs();
   }
 
   addRow() {
-    $("#nuevasCalificacionesTable").find('tbody').append('<tr><td tabindex="1">Nombre</td><td tabindex="1">1</td><td tabindex="1">0</td></tr>');
+    $("#nuevasCalificacionesTable").find('tbody').append('<tr><td tabindex="1">Nombre</td><td tabindex="1">1</td>/tr>');
   }
 
   sumaMedio() {
@@ -41,16 +53,80 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
     let sum = 0;
 
     for (let i = 0, end = trs.length; i < end; i++) {
-      sum += parseInt($("#nuevasCalificacionesTable tbody tr")[i].children[2].textContent)
+      sum += parseInt($("#nuevasCalificacionesTable tbody tr")[i].children[1].textContent)
     }
 
     return sum;
   }
 
-  guardar()
-  {
-    console.log("La funcion para guardar no esta implementada");
+
+  loadUserInfo() {
+    this.auth.getUserInfo().subscribe(res => {
+      if (res['logged'] != 'false') {
+        this.usuarioEmail = res['email'];
+      }
+    });
+  }
+
+  getRubrosACrear(){
     
+    let trs = $("#nuevasCalificacionesTable").find('tbody').find('tr');
+    if (trs.length == 0)
+      return [];
+
+    let rubros = [];
+
+    for (let i = 0, end = trs.length; i < end; i++) {
+      rubros.push({
+        nombre: $("#nuevasCalificacionesTable tbody tr")[i].children[0].textContent,
+        puntaje: $("#nuevasCalificacionesTable tbody tr")[i].children[1].textContent
+      });
+    }
+    return rubros
+  }
+
+  guardarCurso() {
+    console.log(this.nombreCursoNuevo);
+
+    console.log("La funcion para guardar no esta implementada");
+
+    let url = 'cursos'
+
+    //Objeto a enviar al servidor
+    let toSendData = {
+      nombreCurso: this.nombreCursoNuevo,
+      puntajeTotal: this.puntajeTotalCursoNuevo,
+      email: this.usuarioEmail
+    };
+    console.log(toSendData);
+
+    console.log(this.tabla);
+
+    
+    //Guardar Curso para Usuario
+    this.http.post(url, toSendData).subscribe(res => {
+      console.log(res);
+      let cursoId = res['id'];
+      //Guardar cada Rubro
+      let urlRubros = 'rubros'
+
+      //Objeto a enviar al servidor
+      let toSendDataRubros = {
+        cursoId: cursoId,
+        rubros: this.getRubrosACrear()
+      };
+
+      this.http.post(urlRubros, toSendDataRubros).subscribe(res => {
+        console.log(res);
+      }, error => {
+        console.log(error);
+      });
+
+
+    }, error => {
+        console.log(error);
+    });
+
   }
 
 }

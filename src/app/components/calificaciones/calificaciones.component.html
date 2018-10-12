@@ -92,11 +92,21 @@
           <div class="col-sm-12">
             <div class="form-group form-float form-group-lg">
               <div class="form-line">
-                <input type="text" class="form-control">
+                <input [(ngModel)]="nombreCursoNuevo" type="text" class="form-control">
                 <label class="form-label">Nombre del curso</label>
               </div>
             </div>
           </div>
+
+          <div class="col-sm-4">
+            <div class="form-group form-float form-group-lg">
+              <div class="form-line focused">
+                <input [(ngModel)]="puntajeTotalCursoNuevo" type="number" class="form-control">
+                <label class="form-label">Puntaje total del curso</label>
+              </div>
+            </div>
+          </div>
+
           <div class="col-sm-offset-11 col-sm-1">
             <button type="button" class="btn bg-teal btn-block btn-lg waves-effect" (click)="addRow()">+</button>
           </div>
@@ -105,8 +115,7 @@
               <thead>
                 <tr>
                   <th>Nombre</th>
-                  <th>Cantidad</th>
-                  <th>Porcentaje</th>
+                  <th>Puntaje</th>
                 </tr>
               </thead>
               <tbody>
@@ -115,7 +124,6 @@
                 <tr>
                   <th><strong>TOTAL</strong></th>
                   <th>{{sumaFinal()}}</th>
-                  <th>{{sumaMedio()}}%</th>
                 </tr>
               </tfoot>
             </table>
@@ -123,7 +131,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal" (click)="guardar()">GUARDAR</button>
+        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal" (click)="guardarCurso()">GUARDAR</button>
         <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CERRAR</button>
       </div>
     </div>
