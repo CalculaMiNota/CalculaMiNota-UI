@@ -28,6 +28,7 @@ import { CalificacionesComponent } from './components/calificaciones/calificacio
 import { EstimacionesComponent } from './components/estimaciones/estimaciones.component';
 import { MainComponent } from './components/main/main.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { CursosService } from './shared/services/cursos.service';
 
 
 
@@ -85,7 +86,8 @@ const routes: Routes = [
   ],
   providers: [
     HttpService,
-    AuthService
+    AuthService,
+    CursosService
   ],
   bootstrap: [AppComponent]
 })

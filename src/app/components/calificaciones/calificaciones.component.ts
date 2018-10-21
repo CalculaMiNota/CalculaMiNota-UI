@@ -2,6 +2,8 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { StaticUtilties } from '../../shared/classes/validation';
 import { HttpService } from '../../shared/services/http.service';
 import { AuthService } from '../../shared/services/auth.service';
+import { CursosService } from '../../shared/services/cursos.service';
+import { Curso } from '../../shared/classes/curso';
 declare var $: any;
 @Component({
   selector: 'app-calificaciones',
@@ -12,10 +14,13 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
 
   public nombreCursoNuevo: string = "";
   public puntajeTotalCursoNuevo: number = 100;
+  public cursos: Curso[];
   private usuarioEmail: string = "";
   private tabla;
+
   constructor(private http: HttpService,
-    private auth: AuthService) {
+    private auth: AuthService,
+    private cursosService: CursosService) {
 
   }
 
@@ -27,8 +32,8 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
     StaticUtilties.initializeInputs();
   }
 
-  addRow() {
-    $("#nuevasCalificacionesTable").find('tbody').append('<tr><td tabindex="1">Nombre</td><td tabindex="1">1</td>/tr>');
+  addRow(id: string = 'nuevasCalificacionesTable') {
+    $("#" + id).find('tbody').append('<tr><td tabindex="1">Nombre</td><td tabindex="1">1</td>/tr>');
   }
 
   sumaMedio() {
@@ -59,13 +64,30 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
     return sum;
   }
 
-
   loadUserInfo() {
     this.auth.getUserInfo().subscribe(res => {
       if (res['logged'] != 'false') {
         this.usuarioEmail = res['email'];
+        this.loadCursos();
       }
     });
+  }
+
+  loadCursos(){
+    this.cursosService.getCursos(this.usuarioEmail, true).subscribe(res => {
+      this.cursos = res as Curso[];
+      this.cursos.forEach(curso => {
+        $('#rubros_' + curso.id).editableTableWidget();
+      })
+      $.AdminBSB.input.activate();
+    });
+  }
+
+  selectCurso(id)
+  {
+    console.log(id)
+
+    $.AdminBSB.input.activate();
   }
 
   getRubrosACrear(){
@@ -98,10 +120,6 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
       puntajeTotal: this.puntajeTotalCursoNuevo,
       email: this.usuarioEmail
     };
-    console.log(toSendData);
-
-    console.log(this.tabla);
-
     
     //Guardar Curso para Usuario
     this.http.post(url, toSendData).subscribe(res => {
@@ -117,14 +135,14 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
       };
 
       this.http.post(urlRubros, toSendDataRubros).subscribe(res => {
-        console.log(res);
+        
+        this.loadCursos();
       }, error => {
-        console.log(error);
+        
       });
 
-
     }, error => {
-        console.log(error);
+        
     });
 
   }
