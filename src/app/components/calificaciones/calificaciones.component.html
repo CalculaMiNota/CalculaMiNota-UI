@@ -25,7 +25,7 @@
                 >
                 {{curso.nombre}}
                 <div class="">
-                  0 / {{curso.puntaje}} <!-- Deberia de mostrar la suma vs puntaje-->
+                  {{sumaFinal('rubros_' + curso.id, 2)}} / {{curso.puntaje}} <!-- Deberia de mostrar la suma vs puntaje-->
                 </div>
               </a>
             </h4>
@@ -60,14 +60,21 @@
                       <tr>
                         <th>Nombre</th>
                         <th>Puntaje</th>
+                        <th>Nota Actual</th>
                       </tr>
                     </thead>
                     <tbody>
+                      <tr *ngFor="let rubro of curso.rubros">
+                        <td>{{rubro.nombre}}</td>
+                        <td>{{rubro.porcentaje}}</td>
+                        <td>{{rubro.nota_actual}}</td>
+                      </tr>
                     </tbody>
                     <tfoot>
                       <tr>
                         <th><strong>TOTAL</strong></th>
-                        <th>Suma</th>
+                        <th class="{{sumaFinal('rubros_' + curso.id) != curso.puntaje ? 'danger' : ''}}">{{sumaFinal('rubros_' + curso.id)}} / {{curso.puntaje}}</th>
+                        <th><strong>{{sumaFinal('rubros_' + curso.id, 2)}}</strong></th>
                       </tr>
                     </tfoot>
                   </table>

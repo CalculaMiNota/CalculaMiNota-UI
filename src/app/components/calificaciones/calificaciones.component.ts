@@ -36,29 +36,29 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
     $("#" + id).find('tbody').append('<tr><td tabindex="1">Nombre</td><td tabindex="1">1</td>/tr>');
   }
 
-  sumaMedio() {
-    let trs = $("#nuevasCalificacionesTable").find('tbody').find('tr');
+  sumaMedio(id: string = 'nuevasCalificacionesTable') {
+    let trs = $("#" + id ).find('tbody').find('tr');
     if (trs.length == 0)
       return 0;
 
     let sum = 0;
 
     for (let i = 0, end = trs.length; i < end; i++) {
-      sum += parseInt($("#nuevasCalificacionesTable tbody tr")[i].children[1].textContent) * parseInt($("#nuevasCalificacionesTable tbody tr")[i].children[2].textContent);
+      sum += parseInt($("#" + id + " tbody tr")[i].children[1].textContent) * parseInt($("#" + id + " tbody tr")[i].children[2].textContent);
     }
 
     return sum;
   }
 
-  sumaFinal() {
-    let trs = $("#nuevasCalificacionesTable").find('tbody').find('tr');
+  sumaFinal(id: string = 'nuevasCalificacionesTable', posicion: number = 1) {
+    let trs = $("#" + id).find('tbody').find('tr');
     if (trs.length == 0)
       return 0;
 
     let sum = 0;
 
     for (let i = 0, end = trs.length; i < end; i++) {
-      sum += parseInt($("#nuevasCalificacionesTable tbody tr")[i].children[1].textContent)
+      sum += parseInt($("#" + id + " tbody tr")[i].children[posicion].textContent)
     }
 
     return sum;
@@ -76,9 +76,6 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
   loadCursos(){
     this.cursosService.getCursos(this.usuarioEmail, true).subscribe(res => {
       this.cursos = res as Curso[];
-      this.cursos.forEach(curso => {
-        $('#rubros_' + curso.id).editableTableWidget();
-      })
       $.AdminBSB.input.activate();
     });
   }
@@ -86,7 +83,7 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
   selectCurso(id)
   {
     console.log(id)
-
+    $('#rubros_' + id).editableTableWidget();
     $.AdminBSB.input.activate();
   }
 
