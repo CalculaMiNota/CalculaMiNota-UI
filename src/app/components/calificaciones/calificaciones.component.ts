@@ -64,6 +64,24 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
     return sum;
   }
 
+  calculaNotaFinal(id:string, base:number){
+    let trs = $("#" + id).find('tbody').find('tr');
+    if (trs.length == 0)
+      return 0;
+
+    let sum = 0;
+    let puntajeRubro = 0;
+    let notaRubro = 0;
+    for (let i = 0, end = trs.length; i < end; i++) {
+      puntajeRubro = parseInt($("#" + id + " tbody tr")[i].children[1].textContent)
+      notaRubro = parseInt($("#" + id + " tbody tr")[i].children[2].textContent)
+      sum += (puntajeRubro / base) * notaRubro
+    }
+    if (sum % 1 != 0)
+      return sum.toFixed(2);
+    return sum;
+  }
+
   loadUserInfo() {
     this.auth.getUserInfo().subscribe(res => {
       if (res['logged'] != 'false') {
