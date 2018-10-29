@@ -6,6 +6,7 @@ import { CursosService } from '../../shared/services/cursos.service';
 import { Curso } from '../../shared/classes/curso';
 import { Rubro } from 'src/app/shared/classes/rubro';
 import { RubrosService } from 'src/app/shared/services/rubros.service';
+import { Utilities } from 'src/app/shared/classes/utilities';
 declare var $: any;
 @Component({
   selector: 'app-calificaciones',
@@ -187,11 +188,13 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
 
     
     rubro.nombre = nombre;
-    rubro.nota_actual = puntaje;
-    rubro.porcentaje = nota;
+    rubro.nota_actual = nota;
+    rubro.porcentaje = puntaje;
     this.rubrosService.saveRubroCursos(rubro).subscribe(res =>{
+      Utilities.notificarExito("Se ha actualizado correctamente", false);
       console.log(res);
     }, error => {
+      Utilities.notificarError("Ha ocurrido un error al actualizar", false);
       console.log(error);
     })
     
