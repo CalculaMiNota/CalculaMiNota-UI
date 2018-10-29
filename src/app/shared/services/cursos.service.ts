@@ -24,4 +24,8 @@ export class CursosService {
     return this.http.post('cursos', toSendData);
   }
 
+  deleteCurso(id:number){
+    return this.http.post('cursos/delete', {id: id});
+  }
+
 }

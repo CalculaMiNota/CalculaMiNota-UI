@@ -215,4 +215,15 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
       this.notificaError()
     })
   }
+
+  borraCurso(cursoId:number){
+    this.cursosService.deleteCurso(cursoId).subscribe(res => {
+      this.notificaExito();
+      this.cursos = this.cursos.filter(element => {
+        return element.id !== cursoId;
+      });
+    }, error => {
+      this.notificaError();
+    })
+  }
 }
