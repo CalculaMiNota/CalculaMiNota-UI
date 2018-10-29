@@ -21,11 +21,10 @@
               class="panel panel-primary" (click)="selectCurso(curso.id)">
           <div class="panel-heading" role="tab" id="heading_curso_{{curso.id}}" >
             <h4 class="panel-title">
-              <a role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapse_curso_{{curso.id}}" aria-expanded="true"
-                >
+              <a role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapse_curso_{{curso.id}}" aria-expanded="true">
                 {{curso.nombre}}
                 <div class="">
-                  {{calculaNotaFinal('rubros_' + curso.id, curso.puntaje)}} / {{curso.puntaje}} <!-- Deberia de mostrar la suma vs puntaje-->
+                  Base: {{curso.puntaje}}<!-- Deberia de mostrar la suma vs puntaje -->
                 </div>
               </a>
             </h4>
@@ -65,9 +64,10 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let rubro of curso.rubros">
-                        <td>{{rubro.nombre}}</td>
-                        <td>{{rubro.porcentaje}}</td>
-                        <td>{{rubro.nota_actual}}</td>
+                        <td (change)="actualizaRubro(curso.id, rubro.id)">{{rubro.nombre}}</td>
+                        <td (change)="actualizaRubro(curso.id, rubro.id)">{{rubro.porcentaje}}</td>
+                        <td (change)="actualizaRubro(curso.id, rubro.id)">{{rubro.nota_actual}}</td>
+                        <td hidden='hidden'>{{rubro.id}}</td>
                       </tr>
                     </tbody>
                     <tfoot>

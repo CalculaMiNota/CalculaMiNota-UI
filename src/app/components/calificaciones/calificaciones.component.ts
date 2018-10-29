@@ -4,6 +4,8 @@ import { HttpService } from '../../shared/services/http.service';
 import { AuthService } from '../../shared/services/auth.service';
 import { CursosService } from '../../shared/services/cursos.service';
 import { Curso } from '../../shared/classes/curso';
+import { Rubro } from 'src/app/shared/classes/rubro';
+import { RubrosService } from 'src/app/shared/services/rubros.service';
 declare var $: any;
 @Component({
   selector: 'app-calificaciones',
@@ -20,7 +22,8 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
 
   constructor(private http: HttpService,
     private auth: AuthService,
-    private cursosService: CursosService) {
+    private cursosService: CursosService,
+    private rubrosService: RubrosService) {
 
   }
 
@@ -100,8 +103,19 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
 
   selectCurso(id)
   {
-    console.log(id)
+    let that = this
     $('#rubros_' + id).editableTableWidget();
+    $('#rubros_' + id + ' td').on('change', function (evt, newValue) {
+      //Evitar que se llame multiples veces sin sentido
+      evt.stopImmediatePropagation();
+      let trs = evt.currentTarget.parentNode.children
+      let rubroId = parseInt(trs[3].textContent);
+      let nombre:string = trs[0].textContent
+      let puntaje:number = parseInt(trs[1].textContent)
+      let nota:number = parseInt(trs[2].textContent)
+      that.actualizaRubro(id, rubroId, nombre, puntaje, nota);
+    });
+    
     $.AdminBSB.input.activate();
   }
 
@@ -141,7 +155,7 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
       console.log(res);
       let cursoId = res['id'];
       //Guardar cada Rubro
-      let urlRubros = 'rubros'
+      let urlRubros = 'rubros/multiple'
 
       //Objeto a enviar al servidor
       let toSendDataRubros = {
@@ -160,6 +174,27 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
         
     });
 
+  }
+
+  actualizaRubro(cursoId: number, rubroId: number, nombre:string, puntaje:number, nota:number){
+    let curso:Curso = this.cursos.find(function (element) {
+      return element.id == cursoId;
+    });
+
+    let rubro:Rubro = curso.rubros.find(function (element) {
+      return element.id == rubroId;
+    });
+
+    
+    rubro.nombre = nombre;
+    rubro.nota_actual = puntaje;
+    rubro.porcentaje = nota;
+    this.rubrosService.saveRubroCursos(rubro).subscribe(res =>{
+      console.log(res);
+    }, error => {
+      console.log(error);
+    })
+    
   }
 
 }
