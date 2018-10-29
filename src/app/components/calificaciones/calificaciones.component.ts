@@ -40,20 +40,6 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
     $("#" + id).find('tbody').append('<tr><td tabindex="1">Nombre</td><td tabindex="1">1</td>/tr>');
   }
 
-  sumaMedio(id: string = 'nuevasCalificacionesTable') {
-    let trs = $("#" + id ).find('tbody').find('tr');
-    if (trs.length == 0)
-      return 0;
-
-    let sum = 0;
-
-    for (let i = 0, end = trs.length; i < end; i++) {
-      sum += parseInt($("#" + id + " tbody tr")[i].children[1].textContent) * parseInt($("#" + id + " tbody tr")[i].children[2].textContent);
-    }
-
-    return sum;
-  }
-
   sumaFinal(id: string = 'nuevasCalificacionesTable', posicion: number = 1) {
     let trs = $("#" + id).find('tbody').find('tr');
     if (trs.length == 0)
@@ -81,9 +67,8 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
       notaRubro = parseInt($("#" + id + " tbody tr")[i].children[2].textContent)
       sum += (puntajeRubro / base) * notaRubro
     }
-    if (sum % 1 != 0)
-      return sum.toFixed(2);
-    return sum;
+    
+    return (sum % 1 != 0) ? sum.toFixed(2) : sum
   }
 
   loadUserInfo() {
