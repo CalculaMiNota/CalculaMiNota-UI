@@ -177,6 +177,14 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
 
   }
 
+  notificaExito() {
+    Utilities.notificarExito("Se ha actualizado correctamente", false);
+  }
+
+  notificaError() {
+    Utilities.notificarError("Ha ocurrido un error al actualizar", false);
+  }
+
   actualizaRubro(cursoId: number, rubroId: number, nombre:string, puntaje:number, nota:number){
     let curso:Curso = this.cursos.find(function (element) {
       return element.id == cursoId;
@@ -186,18 +194,25 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
       return element.id == rubroId;
     });
 
-    
     rubro.nombre = nombre;
     rubro.nota_actual = nota;
     rubro.porcentaje = puntaje;
     this.rubrosService.saveRubroCursos(rubro).subscribe(res =>{
-      Utilities.notificarExito("Se ha actualizado correctamente", false);
-      console.log(res);
+      this.notificaExito()
     }, error => {
-      Utilities.notificarError("Ha ocurrido un error al actualizar", false);
-      console.log(error);
+      this.notificaError()
     })
     
   }
-
+  
+  actualizaCurso(cursoId: number){
+    let curso = this.cursos.find(element =>{
+      return element.id == cursoId;
+    });
+    this.cursosService.saveCurso(curso, this.usuarioEmail).subscribe(res => {
+      this.notificaExito()
+    }, error => {
+      this.notificaError()
+    })
+  }
 }

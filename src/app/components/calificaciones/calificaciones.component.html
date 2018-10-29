@@ -35,7 +35,7 @@
                 <div class="col-sm-12">
                   <div class="form-group form-float form-group-lg">
                     <div class="form-line">
-                      <input [(ngModel)]="curso.nombre" type="text" class="form-control">
+                      <input (change)="actualizaCurso(curso.id)" [(ngModel)]="curso.nombre" type="text" class="form-control">
                       <label class="form-label">Nombre del curso</label>
                     </div>
                   </div>
@@ -44,7 +44,7 @@
                 <div class="col-sm-4">
                   <div class="form-group form-float form-group-lg">
                     <div class="form-line focused">
-                      <input [(ngModel)]="curso.puntaje" type="number" class="form-control">
+                      <input (change)="actualizaCurso(curso.id)" [(ngModel)]="curso.puntaje" type="number" class="form-control">
                       <label class="form-label">Puntaje total del curso</label>
                     </div>
                   </div>

@@ -14,4 +14,14 @@ export class CursosService {
     return this.http.get('cursos?email=' + email + '&all='+all);
   }
 
+  saveCurso(curso:Curso, email:string){
+    let toSendData = {
+      nombreCurso: curso.nombre,
+      puntajeTotal: curso.puntaje,
+      email: email,
+      id: curso.id
+    };
+    return this.http.post('cursos', toSendData);
+  }
+
 }
