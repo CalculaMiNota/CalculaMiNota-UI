@@ -5,13 +5,20 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
   <div class="card">
     <div class="header">
-      <h2>
-        Calificaciones registradas
-      </h2>
-      <div class=" m-r--5 header-dropdown">
-        <button type="button" class="btn btn-default waves-effect m-r-20" data-toggle="modal" data-target="#nuevoCursoModal">Añadir
-          un curso</button>
+      <div class="row">
+        <div class="col-sm-10">
+          <h2>
+            Calificaciones registradas
+          </h2>
+        </div>
+        <div class="col-sm-2">
+          <h2>
+            <button type="button" class="btn btn-default waves-effect m-r-20" data-toggle="modal" data-target="#nuevoCursoModal">Añadir
+              un curso</button>
+          </h2>
+        </div>
       </div>
+      
     </div>
     <div class="body" *ngIf="cursos != null">
       <!-- Collapsibles-->
