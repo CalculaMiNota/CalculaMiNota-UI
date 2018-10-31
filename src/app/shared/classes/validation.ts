@@ -24,6 +24,9 @@ export class Validation {
                 "confirmPasswordSignUp": {
                     required: true,
                     equalTo: "#passwordSignUp"
+                },
+                "terms": {
+                    required: true
                 }
             },
             messages:{
@@ -37,8 +40,11 @@ export class Validation {
                     minlength: "Debe de tener al menos 8 caracteres."
                 },
                 "confirmPasswordSignUp": {
-                    required: "La confirmacion de contraseña es requerida.",
+                    required: "La confirmación de contraseña es requerida.",
                     equalTo: "Las contraseñas no coinciden"
+                },
+                "terms": {
+                    required: "Para poder registrarse es nesecesario aceptar los términos y condiciones de uso."
                 }
             },
             highlight: function (input) {
