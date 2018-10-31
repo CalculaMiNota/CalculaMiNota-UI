@@ -1,6 +1,9 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { DOCUMENT } from '../../../../node_modules/@angular/common';
 import { HttpService } from '../../shared/services/http.service';
+declare var jquery: any;
+declare var $: any;
+declare let swal: any;
 
 @Component({
   selector: 'app-forgot-password',
@@ -33,13 +36,32 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     };
 
     this.http.post(url, toSendData).subscribe(res => {
-      console.log(res);
+      if(res.toString() === 'true')
+      {
+        swal({
+          title: "Exito!",
+          text: "Correo enviado exitosamente!",
+          type: "success",
+        });
+      }
+      else{
+        swal({
+          title: "Error",
+          text: "Ha ocurrido un problema con el envio del correo",
+          type: "error",
+        });
+      }
+      
     },
     error => {
-      console.log(error);
+      swal({
+        title: "Error",
+        text: "Ha ocurrido un problema con el envio del correo",
+        type: "error",
+      });
       
     });
-    console.log("Funcion de enviar correo no esta implementada");
+    
   }
 
 }

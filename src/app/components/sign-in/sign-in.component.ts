@@ -37,6 +37,11 @@ export class SignInComponent implements OnInit, OnDestroy {
     this.document.body.classList.remove('login-page');
   }
 
+  checkIfEnter(event){
+    if (event.keyCode == 13) {
+      this.login();
+    }
+  }
   login() {
     let url = 'usuarios/login'
 
@@ -56,7 +61,7 @@ export class SignInComponent implements OnInit, OnDestroy {
       
       swal({
         title: "Error",
-        text: "Ha ocurrido un problema con el registro",
+        text: "Ha ocurrido un problema con el ingreso",
         type: "error",
       });
 
