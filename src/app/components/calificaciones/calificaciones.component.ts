@@ -37,7 +37,14 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
   }
 
   addRow(id: string = 'nuevasCalificacionesTable') {
-    $("#" + id).find('tbody').append('<tr><td tabindex="1">Nombre</td><td tabindex="1">1</td>/tr>');
+    if (id === 'nuevasCalificacionesTable')
+    {
+      $("#" + id).find('tbody').append('<tr><td tabindex="1">Nombre</td><td tabindex="1">0</td>/tr>');
+    }
+    else
+    {
+      this.creaRubro(parseInt(id), 'Nombre', 0, 0)
+    }
   }
 
   sumaFinal(id: string = 'nuevasCalificacionesTable', posicion: number = 1) {
@@ -95,7 +102,11 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
       //Evitar que se llame multiples veces sin sentido
       evt.stopImmediatePropagation();
       let trs = evt.currentTarget.parentNode.children
-      let rubroId = parseInt(trs[3].textContent);
+      let rubroId;
+      if (typeof trs[3] !== 'undefined')
+        rubroId = parseInt(trs[3].textContent);
+      else
+        rubroId = 0
       let nombre:string = trs[0].textContent
       let puntaje:number = parseInt(trs[1].textContent)
       let nota:number = parseInt(trs[2].textContent)
@@ -170,24 +181,50 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
     Utilities.notificarError("Ha ocurrido un error al actualizar", false);
   }
 
-  actualizaRubro(cursoId: number, rubroId: number, nombre:string, puntaje:number, nota:number){
-    let curso:Curso = this.cursos.find(function (element) {
+  actualizaRubro(cursoId: number, rubroId: number, nombre: string, puntaje: number, nota: number) {
+    let curso: Curso = this.cursos.find(function (element) {
       return element.id == cursoId;
     });
 
-    let rubro:Rubro = curso.rubros.find(function (element) {
+    let rubro: Rubro = curso.rubros.find(function (element) {
       return element.id == rubroId;
     });
+
+    if (rubroId == 0) {
+      rubro = new Rubro();
+      rubro.curso_id = cursoId
+    }
 
     rubro.nombre = nombre;
     rubro.nota_actual = nota;
     rubro.porcentaje = puntaje;
-    this.rubrosService.saveRubroCursos(rubro).subscribe(res =>{
+    this.rubrosService.saveRubroCursos(rubro).subscribe(res => {
       this.notificaExito()
     }, error => {
       this.notificaError()
     })
-    
+
+  }
+
+  creaRubro(cursoId: number, nombre: string, puntaje: number, nota: number) {
+    let rubro: Rubro = new Rubro();
+    rubro.curso_id = cursoId
+    rubro.nombre = nombre;
+    rubro.nota_actual = nota;
+    rubro.porcentaje = puntaje;
+    this.rubrosService.saveRubroCursos(rubro).subscribe(res => {
+
+      let curso: Curso = this.cursos.find(function (element) {
+        return element.id == cursoId;
+      });
+
+      curso.rubros.push(res as Rubro)
+      this.selectCurso(cursoId)
+      this.notificaExito()
+    }, error => {
+      this.notificaError()
+    })
+
   }
   
   actualizaCurso(cursoId: number){
