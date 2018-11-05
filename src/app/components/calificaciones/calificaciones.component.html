@@ -64,9 +64,10 @@
                   <table id="rubros_{{curso.id}}" class="table table-striped table-bordered" style="cursor: pointer;">
                     <thead>
                       <tr>
-                        <th>Nombre</th>
-                        <th>Puntaje Total</th>
-                        <th>Nota Actual base {{curso.puntaje}}</th>
+                        <th class="align-center" >Nombre</th>
+                        <th class="align-center" >Puntaje Total</th>
+                        <th class="align-center" >Nota Actual base {{curso.puntaje}}</th>
+                        <th class="align-center" >Eliminar</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -75,6 +76,7 @@
                         <td (change)="actualizaRubro(curso.id, rubro.id)">{{rubro.porcentaje}}</td>
                         <td (change)="actualizaRubro(curso.id, rubro.id)">{{rubro.nota_actual}}</td>
                         <td hidden='hidden'>{{rubro.id}}</td>
+                        <th class="align-center"><button class="btn btn-danger" (click)="borrarRubro(rubro.id, curso.id)"><i class="material-icons">delete_forever</i></button></th>
                       </tr>
                     </tbody>
                     <tfoot>
@@ -82,6 +84,7 @@
                         <th><strong>TOTAL</strong></th>
                         <th class="{{sumaFinal('rubros_' + curso.id) != curso.puntaje ? 'danger' : ''}}">{{sumaFinal('rubros_' + curso.id)}} / {{curso.puntaje}}</th>
                         <th><strong>{{calculaNotaFinal('rubros_' + curso.id, curso.puntaje)}}</strong></th>
+                        <th class="align-center" >-</th>
                       </tr>
                     </tfoot>
                   </table>

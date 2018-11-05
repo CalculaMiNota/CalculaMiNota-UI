@@ -173,12 +173,12 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
 
   }
 
-  notificaExito() {
-    Utilities.notificarExito("Se ha actualizado correctamente", false);
+  notificaExito(texto: string = "Se ha actualizado correctamente") {
+    Utilities.notificarExito(texto, false);
   }
 
-  notificaError() {
-    Utilities.notificarError("Ha ocurrido un error al actualizar", false);
+  notificaError(texto: string = "Ha ocurrido un error al actualizar") {
+    Utilities.notificarError(texto, false);
   }
 
   actualizaRubro(cursoId: number, rubroId: number, nombre: string, puntaje: number, nota: number) {
@@ -246,6 +246,21 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
       });
     }, error => {
       this.notificaError();
+    })
+  }
+  
+  borrarRubro(rubroId:number, cursoId:number){
+    this.rubrosService.deleteRubro(rubroId).subscribe(res => {
+      this.notificaExito("Se ha eliminado el rubro correctamente");
+      let curso: Curso = this.cursos.find(function (element) {
+        return element.id == cursoId;
+      });
+
+      curso.rubros = curso.rubros.filter(function (element) {
+        return element.id != rubroId;
+      });
+    }, error => {
+      this.notificaError("Ha ocurrido un problema al eliminar el rubro");
     })
   }
 }

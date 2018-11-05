@@ -15,4 +15,11 @@ export class RubrosService {
     return this.http.post('rubros', rubro);
   }
 
+  deleteRubro(rubroId:number){
+    let data = {
+      id: rubroId
+    }
+    return this.http.post('rubros/delete', data);
+  }
+
 }
