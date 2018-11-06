@@ -1,1 +1,90 @@
-<h1>Estimaciones</h1>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h2>
+                            Estimación de calificaciones
+                        </h2>
+                    </div>
+                </div>
+
+            </div>
+            <div class="body" *ngIf="cursos != null">
+                <!-- Collapsibles-->
+                <div class="panel-group" id="accordion_1" role="tablist" aria-multiselectable="true">
+                    <!-- Each collapse -->
+                    <div *ngFor="let curso of cursos" class="panel panel-primary" (click)="selectCurso(curso.id)">
+                        <div class="panel-heading" role="tab" id="heading_curso_{{curso.id}}">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapse_curso_{{curso.id}}"
+                                    aria-expanded="true">
+                                    {{curso.nombre}}
+                                    <div class="">
+                                        Base: {{curso.puntaje}}
+                                    </div>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse_curso_{{curso.id}}" class="panel-collapse collapse" role="tabpanel">
+                            <div class="panel-body">
+                                <div class="row clearfix">
+                                    <div class="col-sm-12">
+                                        <div class="form-group form-float form-group-lg">
+                                            <div class="form-line">
+                                                <input [(ngModel)]="curso.nombre"
+                                                    type="text" class="form-control" disabled="disabled">
+                                                <label class="form-label">Nombre del curso</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group form-float form-group-lg">
+                                            <div class="form-line focused">
+                                                <input [(ngModel)]="curso.puntaje"
+                                                    type="number" class="form-control" disabled="disabled">
+                                                <label class="form-label">Puntaje total del curso</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <table id="rubros_{{curso.id}}" class="table table-striped table-bordered"
+                                            style="cursor: pointer;">
+                                            <thead>
+                                                <tr>
+                                                    <th class="align-center">Nombre</th>
+                                                    <th class="align-center">Puntaje Total</th>
+                                                    <th class="align-center">Nota Actual base {{curso.puntaje}}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let rubro of curso.rubros">
+                                                    <td >{{rubro.nombre}}</td>
+                                                    <td >{{rubro.porcentaje}}</td>
+                                                    <td >{{rubro.nota_actual}}</td>
+                                                    <td hidden='hidden'>{{rubro.id}}</td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th><strong>TOTAL</strong></th>
+                                                    <th class="{{sumaFinal('rubros_' + curso.id) != curso.puntaje ? 'danger' : ''}}">{{sumaFinal('rubros_'
+                                                        + curso.id)}} / {{curso.puntaje}}</th>
+                                                    <th><strong>{{calculaNotaFinal('rubros_' + curso.id,
+                                                            curso.puntaje)}}</strong></th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
