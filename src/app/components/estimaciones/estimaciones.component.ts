@@ -14,13 +14,9 @@ declare var $: any;
   styleUrls: ['./estimaciones.component.scss']
 })
 export class EstimacionesComponent implements OnInit, AfterViewInit {
-
-  public nombreCursoNuevo: string = "";
-  public puntajeTotalCursoNuevo: number = 100;
   public cursos: Curso[];
-  private usuarioEmail: string = "";
-  private tabla;
-
+  private usuarioEmail: string;
+  
   constructor(private http: HttpService,
     private auth: AuthService,
     private cursosService: CursosService,
