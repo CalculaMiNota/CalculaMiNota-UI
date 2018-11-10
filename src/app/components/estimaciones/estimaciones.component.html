@@ -44,8 +44,17 @@
                                         <div class="form-group form-float form-group-lg">
                                             <div class="form-line focused">
                                                 <input [(ngModel)]="curso.puntaje"
-                                                    type="number" class="form-control" disabled="disabled">
+                                                    type="number" class="form-control">
                                                 <label class="form-label">Puntaje total del curso</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group form-float form-group-lg">
+                                            <div class="form-line focused">
+                                                <input [(ngModel)]="curso.minimo" type="number" class="form-control">
+                                                <label class="form-label">Mínimo para el curso</label>
                                             </div>
                                         </div>
                                     </div>
@@ -71,10 +80,8 @@
                                             <tfoot>
                                                 <tr>
                                                     <th><strong>TOTAL</strong></th>
-                                                    <th class="{{sumaFinal('rubros_' + curso.id) != curso.puntaje ? 'danger' : ''}}">{{sumaFinal('rubros_'
-                                                        + curso.id)}} / {{curso.puntaje}}</th>
-                                                    <th><strong>{{calculaNotaFinal('rubros_' + curso.id,
-                                                            curso.puntaje)}}</strong></th>
+                                                    <th class="{{sumaFinal('rubros_' + curso.id) != curso.puntaje ? 'danger' : ''}}">{{sumaFinal('rubros_'+ curso.id)}} / {{curso.puntaje}}</th>
+                                                    <th class="{{calculaNotaFinal('rubros_' + curso.id, curso.puntaje) <= curso.minimo ? 'danger' : ''}}"><strong>{{calculaNotaFinal('rubros_' + curso.id, curso.puntaje)}}</strong></th>
                                                 </tr>
                                             </tfoot>
                                         </table>

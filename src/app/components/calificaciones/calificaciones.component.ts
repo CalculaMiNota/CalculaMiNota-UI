@@ -17,6 +17,7 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
 
   public nombreCursoNuevo: string = "";
   public puntajeTotalCursoNuevo: number = 100;
+  public minimoCursoNuevo: number = 70;
   public cursos: Curso[];
   private usuarioEmail: string = "";
   private tabla;
@@ -144,7 +145,8 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
     let toSendData = {
       nombreCurso: this.nombreCursoNuevo,
       puntajeTotal: this.puntajeTotalCursoNuevo,
-      email: this.usuarioEmail
+      email: this.usuarioEmail,
+      minimo: this.minimoCursoNuevo
     };
     
     //Guardar Curso para Usuario

@@ -57,6 +57,15 @@
                   </div>
                 </div>
               
+                <div class="col-sm-4">
+                  <div class="form-group form-float form-group-lg">
+                    <div class="form-line focused">
+                      <input (change)="actualizaCurso(curso.id)" [(ngModel)]="curso.minimo" type="number" class="form-control">
+                      <label class="form-label">Mínimo para el curso</label>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="col-sm-offset-11 col-sm-1">
                   <button type="button" class="btn bg-teal btn-block btn-lg waves-effect" (click)="addRow(curso.id)"><i class="material-icons">note_add</i></button>
                 </div>
@@ -83,7 +92,7 @@
                       <tr>
                         <th><strong>TOTAL</strong></th>
                         <th class="{{sumaFinal('rubros_' + curso.id) != curso.puntaje ? 'danger' : ''}}">{{sumaFinal('rubros_' + curso.id)}} / {{curso.puntaje}}</th>
-                        <th><strong>{{calculaNotaFinal('rubros_' + curso.id, curso.puntaje)}}</strong></th>
+                        <th class="{{calculaNotaFinal('rubros_' + curso.id, curso.puntaje) <= curso.minimo ? 'danger' : ''}}"><strong>{{calculaNotaFinal('rubros_' + curso.id, curso.puntaje)}}</strong></th>
                         <th class="align-center" >-</th>
                       </tr>
                     </tfoot>
@@ -125,6 +134,15 @@
               <div class="form-line focused">
                 <input [(ngModel)]="puntajeTotalCursoNuevo" type="number" class="form-control">
                 <label class="form-label">Puntaje total del curso</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group form-float form-group-lg">
+              <div class="form-line focused">
+                <input [(ngModel)]="minimoCursoNuevo" type="number" class="form-control">
+                <label class="form-label">Mínimo para el curso</label>
               </div>
             </div>
           </div>
