@@ -81,7 +81,7 @@
                                                 <tr>
                                                     <th><strong>TOTAL</strong></th>
                                                     <th class="{{sumaFinal('rubros_' + curso.id) != curso.puntaje ? 'danger' : ''}}">{{sumaFinal('rubros_'+ curso.id)}} / {{curso.puntaje}}</th>
-                                                    <th class="{{calculaNotaFinal('rubros_' + curso.id, curso.puntaje) <= curso.minimo ? 'danger' : ''}}"><strong>{{calculaNotaFinal('rubros_' + curso.id, curso.puntaje)}}</strong></th>
+                                                    <th class="{{calculaNotaFinal('rubros_' + curso.id, curso.puntaje) < curso.minimo ? 'danger' : ''}}"><strong>{{calculaNotaFinal('rubros_' + curso.id, curso.puntaje)}}</strong></th>
                                                 </tr>
                                             </tfoot>
                                         </table>
