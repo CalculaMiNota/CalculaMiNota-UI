@@ -4,6 +4,7 @@ import { HttpService } from 'src/app/shared/services/http.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { RubrosService } from 'src/app/shared/services/rubros.service';
 import { CursosService } from 'src/app/shared/services/cursos.service';
+import { DashboardData } from 'src/app/shared/classes/dashboard-data';
 
 @Component({
   selector: 'app-main',
@@ -13,6 +14,7 @@ import { CursosService } from 'src/app/shared/services/cursos.service';
 export class MainComponent implements OnInit {
   public cursos: Curso[];
   private usuarioEmail: string;
+  public data: DashboardData[];
 
   constructor(private http: HttpService,
     private auth: AuthService,
@@ -35,8 +37,8 @@ export class MainComponent implements OnInit {
   }
 
   loadCursos() {
-    this.cursosService.getCursos(this.usuarioEmail, true).subscribe(res => {
-      this.cursos = res as Curso[];
+    this.cursosService.getDashboardData().subscribe(res => {
+      this.data = res as DashboardData[];
     });
   }
 

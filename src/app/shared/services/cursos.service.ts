@@ -11,7 +11,11 @@ export class CursosService {
   constructor(private http: HttpService, private auth:AuthService) { }
 
   getCursos(email:string, all:boolean = false){
-    return this.http.get('cursos?email=' + email + '&all='+all);
+    return this.http.get('cursos');
+  }
+
+  getDashboardData() {
+    return this.http.get('dashboard/data');
   }
 
   saveCurso(curso:Curso, email:string){
