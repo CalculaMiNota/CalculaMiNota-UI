@@ -47,8 +47,12 @@ const routes: Routes = [
       {
         path: "",
         component: MainComponent
-      },{
+      }, {
         path: "calificaciones",
+        component: CalificacionesComponent
+      },
+      {
+        path: "calificaciones/:id",
         component: CalificacionesComponent
       },{
         path: "estimaciones",

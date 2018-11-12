@@ -7,6 +7,7 @@ import { Curso } from '../../shared/classes/curso';
 import { Rubro } from 'src/app/shared/classes/rubro';
 import { RubrosService } from 'src/app/shared/services/rubros.service';
 import { Utilities } from 'src/app/shared/classes/utilities';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 declare var $: any;
 @Component({
   selector: 'app-calificaciones',
@@ -21,17 +22,22 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
   public cursos: Curso[];
   private usuarioEmail: string = "";
   private tabla;
+  private idActual: string;
 
   constructor(private http: HttpService,
     private auth: AuthService,
     private cursosService: CursosService,
-    private rubrosService: RubrosService) {
-
+    private rubrosService: RubrosService,
+    private route: ActivatedRoute) {
+        
   }
 
   ngOnInit() {
     this.tabla = $('#nuevasCalificacionesTable').editableTableWidget();
     this.loadUserInfo();
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.idActual = params.get('id');
+    });
   }
   ngAfterViewInit() {
     StaticUtilties.initializeInputs();
@@ -91,6 +97,16 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
   loadCursos(){
     this.cursosService.getCursos(this.usuarioEmail, true).subscribe(res => {
       this.cursos = res as Curso[];
+      if(this.idActual !== null){
+        let cursoActual = this.cursos.find(curso => {
+          return curso.id == parseInt(this.idActual);
+        });
+        if(cursoActual != null){
+          console.log($('#collapse_' + this.idActual));
+          
+          $('#collapse_' + this.idActual).collapse('show')
+        }
+      }
       $.AdminBSB.input.activate();
     });
   }
