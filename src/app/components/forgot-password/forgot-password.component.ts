@@ -36,7 +36,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     };
 
     this.http.post(url, toSendData).subscribe(res => {
-      if(res.toString() === 'true')
+      if (res['status'] === 'ok')
       {
         swal({
           title: "Exito!",
