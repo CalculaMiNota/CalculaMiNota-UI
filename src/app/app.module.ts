@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: 'sign-in', component: SignInComponent, canActivate: [NologgedGuard] },
   { path: 'sign-up', component: SignUpComponent, canActivate: [NologgedGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [NologgedGuard] },
-  { path: 'reset-password', component: ResetPasswordComponent, canActivate: [NologgedGuard] },
+  { path: 'reset-password/:email/:token', component: ResetPasswordComponent, canActivate: [NologgedGuard] },
   { 
     path: 'app', 
     component: DashboardComponent, 

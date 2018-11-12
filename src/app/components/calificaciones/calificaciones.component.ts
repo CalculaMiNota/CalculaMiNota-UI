@@ -97,16 +97,6 @@ export class CalificacionesComponent implements OnInit, AfterViewInit {
   loadCursos(){
     this.cursosService.getCursos(this.usuarioEmail, true).subscribe(res => {
       this.cursos = res as Curso[];
-      if(this.idActual !== null){
-        let cursoActual = this.cursos.find(curso => {
-          return curso.id == parseInt(this.idActual);
-        });
-        if(cursoActual != null){
-          console.log($('#collapse_' + this.idActual));
-          
-          $('#collapse_' + this.idActual).collapse('show')
-        }
-      }
       $.AdminBSB.input.activate();
     });
   }
