@@ -5,6 +5,7 @@ declare var $ :any;
 export class Validation {
 
     public signInValidator = null;
+    public changePasswordValidator = null;
     
     public createSignUpValidation(){
         this.signInValidator = $('#signUpForm').validate({
@@ -13,9 +14,9 @@ export class Validation {
                     required: true,
                     email: true,
                     remote: {
-                        url: environment.baseUrl + "usuarios/exists?" + $("#emailSignUp").val() ,
-                        type : "get",
-                        }
+                        url: environment.baseUrl + "usuarios/exists?" + $("#emailSignUp").val(),
+                        type: "get",
+                    }
                 },
                 "passwordSignUp": {
                     required: true,
@@ -29,7 +30,7 @@ export class Validation {
                     required: true
                 }
             },
-            messages:{
+            messages: {
                 'emailSignUp': {
                     required: "El correo electrónico es requerido.",
                     email: "Formato de correo no válido.",
@@ -61,9 +62,50 @@ export class Validation {
         });
     }
 
+    public createChangePasswordValidation(){
+        this.changePasswordValidator = $('#reset_password').validate({
+            rules: {
+                "newPassowordReset": {
+                    required: true,
+                    minlength: 8,
+                },
+                "newPassowordResetConf": {
+                    required: true,
+                    equalTo: "#newPassowordReset"
+                }
+            },
+            messages: {
+                "newPassowordReset": {
+                    required: "La nueva contraseña es requerida.",
+                    minlength: "Debe de tener al menos 8 caracteres."
+                },
+                "newPassowordResetConf": {
+                    required: "La confirmación de nueva contraseña es requerida.",
+                    equalTo: "Las contraseñas no coinciden"
+                }
+            },
+            highlight: function (input) {
+                $(input).parents('.form-line').addClass('error');
+                $(input).parents('.form-line').removeClass('success');
+            },
+            unhighlight: function (input) {
+                $(input).parents('.form-line').removeClass('error');
+                $(input).parents('.form-line').addClass('success');
+            },
+            errorPlacement: function (error, element) {
+                $(element).parents('.input-group').append(error);
+            }
+        });
+    }
+
     public validateSingUp(){
         this.signInValidator.resetForm();
         return $("#signUpForm").valid();
+    }
+
+    public validateChangePassword(){
+        this.changePasswordValidator.resetForm();
+        return $("#reset_password").valid();
     }
 
 }

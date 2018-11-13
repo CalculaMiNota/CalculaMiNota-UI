@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { HttpService } from 'src/app/shared/services/http.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Validation } from 'src/app/shared/classes/validation';
+import { Utilities } from 'src/app/shared/classes/utilities';
 declare var $: any;
 declare let swal: any;
 @Component({
@@ -16,11 +18,14 @@ export class ResetPasswordComponent implements OnInit {
   private email:string;
   private token:string;
 
+  private validation: Validation;
+
+
   constructor(@Inject(DOCUMENT) private document: Document,
     private http: HttpService,
     private route: ActivatedRoute,
     private router: Router) {
-
+    this.validation = new Validation();
   }
 
 
@@ -30,6 +35,8 @@ export class ResetPasswordComponent implements OnInit {
       this.email = params.get('email');
       this.token = params.get('token');
     });
+    this.validation.createChangePasswordValidation();
+
   }
 
   ngOnDestroy() {
@@ -37,6 +44,11 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   cambiaContrasenia(){
+    if (!this.validation.validateChangePassword()) {
+      Utilities.notificarError("Datos no válidos");
+      return;
+    }
+
     let toSendData = {
       email: this.email,
       password: this.newResetPassword,
