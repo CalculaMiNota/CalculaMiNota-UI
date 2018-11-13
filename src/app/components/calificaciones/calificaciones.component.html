@@ -76,7 +76,7 @@
                         <th class="align-center" >Nombre</th>
                         <th class="align-center" >Puntaje Total</th>
                         <th class="align-center" >Nota Actual base {{curso.puntaje}}</th>
-                        <th class="align-center" >Eliminar</th>
+                        <th class="align-center" ><i class="material-icons">delete_forever</i></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -85,7 +85,7 @@
                         <td (change)="actualizaRubro(curso.id, rubro.id)">{{rubro.porcentaje}}</td>
                         <td (change)="actualizaRubro(curso.id, rubro.id)">{{rubro.nota_actual}}</td>
                         <td hidden='hidden'>{{rubro.id}}</td>
-                        <th class="align-center"><button class="btn btn-danger" (click)="borrarRubro(rubro.id, curso.id)"><i class="material-icons">delete_forever</i></button></th>
+                        <td class="align-center"><button style="padding: 5px 5px;" class="btn btn-sm btn-danger" (click)="borrarRubro(rubro.id, curso.id)"><i class="material-icons">delete_forever</i></button></td>
                       </tr>
                     </tbody>
                     <tfoot>
@@ -147,8 +147,8 @@
             </div>
           </div>
 
-          <div class="col-sm-offset-11 col-sm-1">
-            <button type="button" class="btn bg-teal btn-block btn-lg waves-effect" (click)="addRow()"><i class=" align-center material-icons">note_add</i></button>
+          <div class="col-sm-offset-11 col-sm-1 align-center">
+            <button type="button" class="btn bg-teal btn-block btn-lg waves-effect align-center btn-sm" (click)="addRow()"><i class="align-center material-icons">note_add</i></button>
           </div>
           <div class="col-sm-12">
             <table id="nuevasCalificacionesTable" class="table table-striped table-bordered table-responsive" style="cursor: pointer;">
