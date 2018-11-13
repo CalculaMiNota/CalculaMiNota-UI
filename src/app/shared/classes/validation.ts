@@ -14,7 +14,7 @@ export class Validation {
                     required: true,
                     email: true,
                     remote: {
-                        url: environment.baseUrl + "usuarios/exists?" + $("#emailSignUp").val(),
+                        url: environment.baseUrl + "usuarios/exists?emailSignUp=" + $("#emailSignUp").val(),
                         type: "get",
                     }
                 },
