@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,8 @@ export class AuthService {
 
   public isLogged(){
     if(environment.production === true){
-      if(!location.origin.includes('https://www.calculaminota.com')){
-        location.href = 'https://www.calculaminota.com' + location.pathname;
+      if (!location.origin.includes('https://calculaminota.herokuapp.com/')){
+        location.href = 'https://calculaminota.herokuapp.com/' + location.pathname;
       }
     }
     return this.http.get('usuarios/isLogged');
