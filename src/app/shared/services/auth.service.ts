@@ -10,11 +10,6 @@ export class AuthService {
   constructor(private http:HttpService) { }
 
   public isLogged(){
-    if(environment.production === true){
-      if (!location.origin.includes('https://calculaminota.herokuapp.com')){
-        location.href = 'https://calculaminota.herokuapp.com' + location.pathname;
-      }
-    }
     return this.http.get('usuarios/isLogged');
   }
 
